@@ -8,8 +8,8 @@
 Introduction to system-level programming with an emphasis on C programming, process management, and small scale concurrency with multi-threaded programming. Special attention will be devoted to proficiency with memory management and debugging facilities both in a sequential and parallel setting.
 
 **Textbooks**:
-* ***A Book on C: Programming in C (4th Edition)*** by Al Kelley, Ira Pohl
-* ***Programming with POSIX Threads*** by David R. Butenhof
+* [***A Book on C: Programming in C (4th Edition)*** by Al Kelley, Ira Pohl](https://www.amazon.com/Book-Programming-4th-Al-Kelley/dp/0201183994)
+* [***Programming with POSIX Threads*** by David R. Butenhof](https://www.amazon.com/Programming-POSIX-Threads-David-Butenhof-dp-0201633922/dp/0201633922/ref=mt_paperback?_encoding=UTF8&me=&qid=)
 * ***The C Programming Language (2nd Edition)*** by Brian W. Kernighan and Dennis M. Ritchie (Optional)
 * ***The Developer’s Guide to Debugging (2nd Edition)*** by Thorsten Grötker et al. (Optional)
 
