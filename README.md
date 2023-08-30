@@ -3,6 +3,8 @@
 ### Disclaimer:
 > This repository is published strictly for reference and educational purposes only. Reproducing the code therein in any form is considered a violation of [UCONN's academic integrity policy](https://community.uconn.edu/the-student-code-appendix-a/).
 
+### Course Information:
+
 **Term:** Fall 2023
 
 **Instructor:** Prof. Wei Wei
@@ -10,13 +12,15 @@
 **Course Description:**
 Introduction to system-level programming with an emphasis on C programming, process management, and small scale concurrency with multi-threaded programming. Special attention will be devoted to proficiency with memory management and debugging facilities both in a sequential and parallel setting.
 
-**Textbooks**:
+### Textbooks:
+
 * [***A Book on C: Programming in C (4th Edition)*** by Al Kelley, Ira Pohl](https://www.amazon.com/Book-Programming-4th-Al-Kelley/dp/0201183994)
 * [***Programming with POSIX Threads*** by David R. Butenhof](https://www.amazon.com/Programming-POSIX-Threads-David-Butenhof-dp-0201633922/dp/0201633922/ref=mt_paperback?_encoding=UTF8&me=&qid=)
 * ***The C Programming Language (2nd Edition)*** by Brian W. Kernighan and Dennis M. Ritchie (Optional)
 * ***The Developer’s Guide to Debugging (2nd Edition)*** by Thorsten Grötker et al. (Optional)
 
-**Course Outline and Schedule:** (subject to change)
+### Course Outline:
+
 1. Course Overview; Intro to C (ABC Ch2, K&R Ch1)
 2. Basic data types (ABC Ch2 & Ch3, K&R Ch2)
 3. Flow of control and functions (ABC Ch4 & Ch5, K&R Ch3 and Ch4)
