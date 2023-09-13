@@ -5,9 +5,9 @@
 #include <assert.h>
 
 //convert the decimal integer d to hexadecimal, the result is stored in hex[]
-void dec_hex(int d, char hex[])
+void dec_hex(const int d, char hex[80])
 {
-	char digits[] ={'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B',
+	const static char digits[] ={'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B',
 					'C', 'D', 'E', 'F'};
 	
 	int k = 0;
@@ -16,7 +16,7 @@ void dec_hex(int d, char hex[])
 	//Then what?
 	//If we are getting the digits in a reverse order, what should we do in the end?
 	
-	unsigned int num_hex_digits = ({ // this will probably get optimized to a single `bsr` instruction, i hope
+	const unsigned int num_hex_digits = ({ // this will probably get optimized to a single `bsr` instruction, i hope
 		unsigned int floor_log2 = 0;
 		k = d;
 		while (k >>= 1) ++floor_log2;
