@@ -12,15 +12,14 @@
 //Implement the following function
 //The function sum_n_bytes returns the sum of the values of the first n bytes in the memory block
 //pointed by the pointer p
-unsigned sum_n_bytes(unsigned *p, int n)
+unsigned sum_n_bytes(const unsigned char * const p, const int n)
 {
 	//fill in your code below
 	//Note that the sum should be an unsigned integer
 	//This should has some ramifications on your code
 	//Only a few lines of code expected
-	unsigned char const *byte_ptr = (unsigned char const*)p; // idk why the type up there is a UL*
 	unsigned int sum = 0;
-	for (int i = 0; i < n; ++i) sum += byte_ptr[i];
+	for (int i = 0; i < n; ++i) sum += p[i];
 	return sum;
 }
 
