@@ -6,20 +6,22 @@
 //the pointer p
 
  
+#include <stddef.h>
 #include <stdio.h>
+#include <stdint.h>
 #include <stdlib.h>
 
 //Implement the following function
 //The function sum_n_bytes returns the sum of the values of the first n bytes in the memory block
 //pointed by the pointer p
-unsigned sum_n_bytes(const unsigned char * const p, const int n)
+size_t sum_n_bytes(const uint8_t * const restrict p, const size_t n)
 {
 	//fill in your code below
 	//Note that the sum should be an unsigned integer
 	//This should has some ramifications on your code
 	//Only a few lines of code expected
-	unsigned int sum = 0;
-	for (int i = 0; i < n; ++i) sum += p[i];
+	size_t sum = 0;
+	for (size_t i = 0; i < n; ++i) sum += p[i];
 	return sum;
 }
 
