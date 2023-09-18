@@ -16,12 +16,8 @@ void dec_hex(const int d, char hex[80])
 	//Then what?
 	//If we are getting the digits in a reverse order, what should we do in the end?
 	
-	const unsigned int num_hex_digits = ({ // this will probably get optimized to a single `bsr` instruction, i hope
-		unsigned int floor_log2 = 0;
-		k = d;
-		while (k >>= 1) ++floor_log2;
-		(floor_log2 >> 2) + 1;
-	});
+	// this gets optimized to a single (BSR) instruction in assembly
+	const unsigned int num_hex_digits = ((__builtin_clz(d) ^ (8*sizeof(d) - 1)) >> 2) + 1;
 	
 	for (k = 0; k < num_hex_digits; k++)
 		hex[num_hex_digits - k - 1] = digits[(d >> (k << 2)) & 15];
