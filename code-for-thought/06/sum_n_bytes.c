@@ -18,7 +18,7 @@ unsigned sum_n_bytes(unsigned *p, int n)
 	//Note that the sum should be an unsigned integer
 	//This should has some ramifications on your code
 	//Only a few lines of code expected
-	unsigned char const *byte_ptr = p; // convert p to a byte pointer, idk why the type up there is what it is
+	unsigned char const *byte_ptr = (unsigned char const*)p; // idk why the type up there is a UL*
 	unsigned int sum = 0;
 	for (int i = 0; i < n; ++i) sum += byte_ptr[i];
 	return sum;
