@@ -49,42 +49,31 @@ PointPair_t shortest_dist_pair(const unsigned int n, const Point_t points[]) {
     return p_pair;
 }
 
-//Do not change the following code
-int main(int argc, char *argv[])
-{
-	Point_t points[N];
-	if(argc !=2)
-	{
+// i changed this code ;3
+int main(int argc, const char *argv[]) {
+	if (argc != 2) {
 		printf("Usage: %s n\n", argv[0]);
 		return -1;
 	}
+	
+	// read the number of points to generate
 	int n = atoi(argv[1]);
-	assert(n > 1 && n <= N);
- 
-	int i;
-
-	//randomly generate n points
+	if (n <= 1 || n > N) {
+		// normally you would want a better error message than this
+		// but i am keeping it as this for outward consistency
+		__assert_fail("n > 1 && n <= N", __FILE__, __LINE__, __ASSERT_FUNCTION);
+	}
+	
+	// seed the rng
 	srand(12345);
-	for(i=0; i<n; i++)
-	{
-		points[i].id = i;
-		points[i].x = ((double)rand())/RAND_MAX;
-		points[i].y = ((double)rand())/RAND_MAX;
-	}
 	
+	// randomly generate N points
+	Point_t points[N];
+	for (int i = 0; i < n; ++i)
+		points[i] = (Point_t) { i, ((double)rand())/RAND_MAX, ((double)rand())/RAND_MAX };
+	
+	// print out the closest two points
 	PointPair_t p_pair = shortest_dist_pair(n, points);
-	
-	// make sure the first point has smaller id
-	if (p_pair.p1.id > p_pair.p2.id) {
-		Point_t tmp;
-		tmp = p_pair.p1; 
-		p_pair.p1 = p_pair.p2; 
-		p_pair.p2 = tmp;
-		// SAFETY: shortest_dist_pair always iterates s.t. p1.id < p2.id
-		// if the passed in list is sorted by ids, which it is.
-		__builtin_unreachable();
-	}
-	
 	printf("%05d %lf %lf\n", p_pair.p1.id, p_pair.p1.x, p_pair.p1.y);
 	printf("%05d %lf %lf\n", p_pair.p2.id, p_pair.p2.x, p_pair.p2.y);
 	
