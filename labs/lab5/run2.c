@@ -21,8 +21,7 @@ int main(int argc, char **argv) {
     
     if (cmd1_runner_pid == 0) {
         // in child process - execute first command
-        char *args[] = {argv[1], argv[2], NULL};
-        if (execvp(args[0], args) == -1) {
+        if (execlp(argv[1], argv[1], argv[2], NULL) == -1) {
             perror("execvp()");
             exit(EXIT_FAILURE);
         }
