@@ -40,8 +40,8 @@ node * remove_first(node **head, node **tail)  {
     return p;
 }
 
-void print_list(node *head) {for (
-    node *p = head; p != NULL; p = p->next)
+void print_list(node *head) {
+    for (node *p = head; p != NULL; p = p->next)
         printf("%d ", p->v);
     printf("\n");
 }
