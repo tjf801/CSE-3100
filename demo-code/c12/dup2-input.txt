@@ -1,0 +1,4 @@
+this is dup2
+input
+one more line
+
