@@ -10,7 +10,8 @@ int main(int argc, char **argv) {
         return 1;
     }
     
-    // making this program made me miss rust's `Result<T, E>`.
+    // this is as good a time as any to drop this paper
+    // https://www.microsoft.com/en-us/research/uploads/prod/2019/04/fork-hotos19.pdf
     
     // child process runs first command
     pid_t cmd1_runner_pid = fork();
