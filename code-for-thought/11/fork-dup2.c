@@ -34,7 +34,7 @@ int main(int argc, char *argv[]) {
         // strcpy(buffer, argv[1]);
         
         // convert argv[1] to caps
-		// and yes, i just checked, and modifying argv is completely defined behavior, apparently
+        // and yes, i just checked, and modifying argv is completely defined behavior, apparently
         for (int i = 0; argv[1][i]; ++i) argv[1][i] = toupper(argv[1][i]);
         
         // redirect stdout to the file
