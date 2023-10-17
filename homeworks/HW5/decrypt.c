@@ -170,6 +170,8 @@ int main(int argc, char *argv[]) {
     }
 
     // around 98% of the program runtime is spent in this function.
+    // NOTE: i realized that it's because im testing this inside of my own PERSONAL
+    //       linux vm, where file reads outside of it take a really long time.
     read_file_to_array("dict.txt");
 
     int encrypted[MAX];
