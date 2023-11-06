@@ -46,6 +46,8 @@ int q_init(job_queue_t *q, int max_jobs) {
         die("malloc()");
     for (int i = 0; i < max_jobs; i++)
         q->jobs[i] = rand() % 100 + 1;
+    if (pthread_mutex_init(&q->mutex, NULL))
+        die("pthread_mutex_init()");
     return 0;
 }
 
@@ -79,6 +81,8 @@ void q_destroy(job_queue_t *q) {
         free(q->jobs);
         q->jobs = NULL;
     }
+    if (pthread_mutex_destroy(&q->mutex))
+        die("pthread_mutex_destroy()");
 }
 
 /*************  END OF QUEUE *********************/
