@@ -108,10 +108,30 @@ void printer_single(printer_t *pprinter) {
     }
 }
 
+
+// returns -1 if q has no more jobs left
+int threaded_q_fetch_job(job_queue_t *q, int id) {
+    if (pthread_mutex_lock(&q->mutex)) die("pthread_mutex_lock()");
+    int fetched_job = q_num_jobs(q) > 0 ? q_fetch_job(q, id) : -1;
+    if (pthread_mutex_unlock(&q->mutex)) die("pthread_mutex_lock()");
+    return fetched_job;
+}
+
 /* main function for printers */
-void * printer_main(void * arg) {
-    // TODO
-    return arg;
+void *printer_main(printer_t *self) {
+    // printer's current job: -1 means no job (done)
+    int current_job = threaded_q_fetch_job(self->jq, self->id);
+    
+    while (current_job != -1) {
+        // run job
+        print_job(current_job);
+        self->njobs++;
+        
+        // fetch next job
+        current_job = threaded_q_fetch_job(self->jq, self->id);
+    }
+    
+    return NULL;
 }
 
 int main(int argc, char *argv[]) {
@@ -119,7 +139,7 @@ int main(int argc, char *argv[]) {
     int num_jobs = DEFAULT_NUM_JOBS;
     int demo = 0;
     
-    int i, status;
+    int i;
     for (i = 1; i < argc; i++) {
         if (strcmp(argv[i], "-p") == 0 && i + 1 < argc) {
             num_printers = atoi(argv[++i]);
@@ -146,8 +166,6 @@ int main(int argc, char *argv[]) {
     int seed = (num_jobs << 24) ^ (num_printers << 8);
     srand(seed);
     
-    // insert necessary init and destroy functions below
-    
     // define job_queue and initialize it
     job_queue_t job_queue;
     
@@ -166,13 +184,20 @@ int main(int argc, char *argv[]) {
         exit(0);
     }
     
-    /* TODO: 
-     *      prepare arguments to threads
-     *      create threads
-     *      wait for other threads
-     *  Also, properly init and desctroy mutex.
-     *  */
+    for (int i = 0; i < num_printers; ++i) {
+        printers[i] = (printer_t) { .id = i, .jq = &job_queue };
+        // NOTE: this means that inside of `printer_main`, `self->thread_id` may still be 0.
+        if (pthread_create(&printers[i].thread_id, NULL, (void*(*)(void*))printer_main, &printers[i]))
+            die("pthread_create()");
+    }
     
+    // wait for all printers to complete
+    for (int i = 0; i < num_printers; ++i) {
+        if (pthread_join(printers[i].thread_id, NULL))
+            die("pthread_join()");
+    }
+    
+    // if only there was some way to ensure that this was ran whenever job_queue went out of scope
     q_destroy(&job_queue);
     
     print_printer_summary(printers, num_printers);
