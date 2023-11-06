@@ -93,22 +93,13 @@ void print_printer_summary(printer_t *pprinter, int nprinters) {
 }
 
 void printer_single(printer_t *pprinter) {
-    int done = 0;
     job_queue_t *jq = pprinter->jq;
     
-    // keep track of how many jobs are printed by this printer
-    pprinter->njobs = 0;
-    while (!done) {
-        int r = q_num_jobs(jq); // get the number of remaining jobs
-        if (r <= 0) {       // done ?
-            done = 1;
-            continue;
-        }
-        int job = q_fetch_job(jq, pprinter->id);
-        
+    while (q_num_jobs(jq) > 0) {
         // print the job
-        print_job(job);
+        print_job(q_fetch_job(jq, pprinter->id));
         
+        // keep track of how many jobs are printed by this printer
         pprinter->njobs++;
     }
 }
@@ -164,6 +155,7 @@ int main(int argc, char *argv[]) {
         printf("Demo: there is only one printer.\n");
         printers[0].id = 0;
         printers[0].jq = &job_queue;
+        printers[0].njobs = 0;
         printer_single(printers);
         q_destroy(&job_queue);
         print_printer_summary(printers, 1);
