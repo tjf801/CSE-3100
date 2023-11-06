@@ -12,8 +12,7 @@ typedef struct {
     TMatrix *m, *n, *t;
 } thread_arg_t;
 
-static void * thread_main(void * p_arg)
-{
+static void * thread_main(void * p_arg) {
     // TODO
     return NULL;
 }
@@ -25,16 +24,12 @@ static void * thread_main(void * p_arg)
  *
  * Similar to mulMatrix, but with multi-threading.
  */
-TMatrix * mulMatrix_thread(TMatrix *m, TMatrix *n)
-{
-    if (    m == NULL || n == NULL
-         || m->ncols != n->nrows )
-        return NULL;
-
+TMatrix * mulMatrix_thread(TMatrix *m, TMatrix *n) {
+    if (m == NULL || n == NULL || m->ncols != n->nrows) return NULL;
+    
     TMatrix * t = newMatrix(m->nrows, n->ncols);
-    if (t == NULL)
-        return t;
-
+    if (t == NULL) return t;
+    
     // TODO
     return t;
 }
