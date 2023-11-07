@@ -15,14 +15,15 @@ typedef struct {
 
 static void *thread_main(thread_arg_t *args) {
     const int num_block_rows = (args->m->nrows + BLOCK_SIZE - 1) / BLOCK_SIZE;
-    const int num_block_rows_per_thread = num_block_rows / MAX_THREADS;
+    const int num_block_rows_per_thread = (num_block_rows + MAX_THREADS - 1) / MAX_THREADS;
     
     const int start_m_row = args->id * num_block_rows_per_thread * BLOCK_SIZE;
     
     for (int block_row_num = 0; block_row_num < num_block_rows_per_thread; block_row_num++) {
         for (int block_start_n_col = 0; block_start_n_col < args->n_T->nrows; block_start_n_col += BLOCK_SIZE) {
             int block_start_row = start_m_row + BLOCK_SIZE * block_row_num;
-            for (int i = block_start_row; i < block_start_row + BLOCK_SIZE && i < args->m->nrows; ++i) {
+            for (int i = block_start_row; i < block_start_row + BLOCK_SIZE; ++i) {
+                if (i >= args->m->nrows) return NULL;
                 for (int j = block_start_n_col; j < block_start_n_col + BLOCK_SIZE && j < args->n_T->nrows; ++j) {
                     // dot product
                     TElement sum = (TElement)0;
