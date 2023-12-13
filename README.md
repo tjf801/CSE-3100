@@ -1,7 +1,7 @@
 # CSE 3100. Systems Programming
 
 ### Disclaimer:
-> This repository is published strictly for reference and educational purposes only. Reproducing the code therein in any form is considered a violation of [UCONN's academic integrity policy](https://community.uconn.edu/the-student-code-appendix-a/).
+> This repository is published strictly for reference and educational purposes only. Reproducing the code therein in any form is considered a violation of [UCONN's academic integrity policy](https://community.uconn.edu/the-student-code-appendix-a/), and the end user of this software is strictly liable for any and all damages that may arise from the use of this software.
 
 ### Course Information:
 
